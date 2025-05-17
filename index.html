@@ -7,9 +7,10 @@
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #f2f2f2;
       color: #333;
+      line-height: 1.6;
     }
     header, footer {
       background: #1e1e1e;
@@ -24,18 +25,24 @@
       margin: 0 1rem;
       color: #00d8ff;
       text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: #0088cc;
     }
     section {
       max-width: 1100px;
       margin: 2rem auto;
-      padding: 1rem;
+      padding: 1rem 2rem;
       background: white;
       border-radius: 8px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
     h2 {
-      border-bottom: 2px solid #00d8ff;
+      border-bottom: 3px solid #00d8ff;
       padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
     }
     .grid {
       display: grid;
@@ -47,44 +54,45 @@
       border-radius: 8px;
       overflow: hidden;
       position: relative;
-      transition: transform 0.3s;
+      cursor: pointer;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     .game-card:hover {
-      transform: scale(1.03);
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
     }
     .game-card img {
       width: 100%;
       height: 160px;
       object-fit: cover;
+      display: block;
     }
     .game-card .info {
       padding: 0.5rem;
       text-align: center;
-    }
-    .game-card .info strong {
-      display: block;
+      font-weight: 700;
       font-size: 1.1rem;
-      margin-bottom: 0.3rem;
+      color: #222;
     }
     .overlay {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.6);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.6);
       color: white;
+      font-size: 2.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       opacity: 0;
-      transition: opacity 0.3s;
-      font-size: 2rem;
-      cursor: pointer;
+      transition: opacity 0.3s ease;
+      border-radius: 8px;
     }
     .game-card:hover .overlay {
       opacity: 1;
     }
+    /* Modal */
     .modal {
       display: none;
       position: fixed;
@@ -93,31 +101,70 @@
       background: rgba(0,0,0,0.8);
       justify-content: center;
       align-items: center;
-      z-index: 10;
+      z-index: 1000;
+      padding: 1rem;
     }
     .modal-content {
       background: white;
       max-width: 700px;
-      width: 90%;
+      width: 100%;
       border-radius: 10px;
-      overflow: auto;
-      padding: 1rem;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+      position: relative;
+      padding: 1.5rem;
     }
     .modal iframe {
       width: 100%;
       height: 360px;
+      border: none;
+      border-radius: 8px;
     }
     .close-btn {
-      float: right;
-      font-size: 1.5rem;
+      position: absolute;
+      top: 12px;
+      right: 20px;
+      font-size: 2rem;
+      font-weight: bold;
+      color: #333;
       cursor: pointer;
+      user-select: none;
+    }
+    .modal-content h3 {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+    .modal-content p {
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      color: #555;
+    }
+    .modal-content a {
+      display: inline-block;
+      background: #00d8ff;
+      color: white;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-weight: 700;
+      transition: background 0.3s ease;
+    }
+    .modal-content a:hover {
+      background: #0088cc;
+    }
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+      .modal-content iframe {
+        height: 240px;
+      }
     }
   </style>
 </head>
 <body>
   <header>
     <h1>Vijay Deshwal</h1>
-    <p>Solo Game Developer | Unity & C# Specialist</p>
+    <p>Solo Game Developer | Unity &amp; C# Specialist</p>
     <nav>
       <a href="#about">About</a>
       <a href="#projects">Games</a>
@@ -137,16 +184,15 @@
     <h2>Games I Worked On</h2>
     <div class="grid">
       <div class="game-card" onclick="openModal('game1')">
-        <img src="https://via.placeholder.com/220x160" alt="Game Icon" />
+        <img src="images/highway-traffic-racer.png" alt="Highway Traffic Racer Icon" />
         <div class="overlay">+</div>
-        <div class="info"><strong>Highway Traffic Racer</strong></div>
+        <div class="info">Highway Traffic Racer</div>
       </div>
       <div class="game-card" onclick="openModal('game2')">
-        <img src="https://via.placeholder.com/220x160" alt="Game Icon" />
+        <img src="images/fruit-merge.png" alt="Fruit Merge Icon" />
         <div class="overlay">+</div>
-        <div class="info"><strong>Fruit Merge</strong></div>
+        <div class="info">Fruit Merge</div>
       </div>
-      <!-- Add more games as needed -->
     </div>
   </section>
 
@@ -169,23 +215,23 @@
     <p>&copy; 2025 Vijay Deshwal. All rights reserved.</p>
   </footer>
 
-  <!-- Modals for each game -->
-  <div id="game1" class="modal">
-    <div class="modal-content">
+  <!-- Game Modals -->
+  <div id="game1" class="modal" onclick="closeModal('game1')">
+    <div class="modal-content" onclick="event.stopPropagation()">
       <span class="close-btn" onclick="closeModal('game1')">&times;</span>
       <h3>Highway Traffic Racer</h3>
-      <iframe src="https://www.youtube.com/embed/your-video-id" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" allowfullscreen></iframe>
       <p>Endless car dodging game with speed increasing over time. Features smooth left-right button controls.</p>
-      <a href="#" target="_blank">Play on Google Play</a>
+      <a href="#" target="_blank" rel="noopener">Play on Google Play</a>
     </div>
   </div>
-  <div id="game2" class="modal">
-    <div class="modal-content">
+  <div id="game2" class="modal" onclick="closeModal('game2')">
+    <div class="modal-content" onclick="event.stopPropagation()">
       <span class="close-btn" onclick="closeModal('game2')">&times;</span>
       <h3>Fruit Merge</h3>
-      <iframe src="https://www.youtube.com/embed/your-video-id" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" allowfullscreen></iframe>
       <p>Combine fruits to evolve and reach the watermelon. Features physics-based mechanics and casual gameplay.</p>
-      <a href="#" target="_blank">Play on Google Play</a>
+      <a href="#" target="_blank" rel="noopener">Play on Google Play</a>
     </div>
   </div>
 
