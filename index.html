@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vijay Deshwal | Game Developer</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f2f2f2;
+      color: #333;
+    }
+    header, footer {
+      background: #1e1e1e;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+    }
+    nav {
+      margin-top: 0.5rem;
+    }
+    nav a {
+      margin: 0 1rem;
+      color: #00d8ff;
+      text-decoration: none;
+    }
+    section {
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      border-bottom: 2px solid #00d8ff;
+      padding-bottom: 0.5rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+    .game-card {
+      background: #eee;
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+      transition: transform 0.3s;
+    }
+    .game-card:hover {
+      transform: scale(1.03);
+    }
+    .game-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+    .game-card .info {
+      padding: 0.5rem;
+      text-align: center;
+    }
+    .game-card .info strong {
+      display: block;
+      font-size: 1.1rem;
+      margin-bottom: 0.3rem;
+    }
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-size: 2rem;
+      cursor: pointer;
+    }
+    .game-card:hover .overlay {
+      opacity: 1;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+    }
+    .modal-content {
+      background: white;
+      max-width: 700px;
+      width: 90%;
+      border-radius: 10px;
+      overflow: auto;
+      padding: 1rem;
+    }
+    .modal iframe {
+      width: 100%;
+      height: 360px;
+    }
+    .close-btn {
+      float: right;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Vijay Deshwal</h1>
+    <p>Solo Game Developer | Unity & C# Specialist</p>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#projects">Games</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>
+      I'm a solo game developer with experience in Unity and C#, creating client work and game clones. I'm passionate about building games and running my own studio.
+    </p>
+  </section>
+
+  <section id="projects">
+    <h2>Games I Worked On</h2>
+    <div class="grid">
+      <div class="game-card" onclick="openModal('game1')">
+        <img src="https://via.placeholder.com/220x160" alt="Game Icon" />
+        <div class="overlay">+</div>
+        <div class="info"><strong>Highway Traffic Racer</strong></div>
+      </div>
+      <div class="game-card" onclick="openModal('game2')">
+        <img src="https://via.placeholder.com/220x160" alt="Game Icon" />
+        <div class="overlay">+</div>
+        <div class="info"><strong>Fruit Merge</strong></div>
+      </div>
+      <!-- Add more games as needed -->
+    </div>
+  </section>
+
+  <section id="services">
+    <h2>Services</h2>
+    <ul>
+      <li>Unity Game Development (2D/3D)</li>
+      <li>Game Prototypes & Clones</li>
+      <li>Custom Freelance Game Projects</li>
+      <li>Game Systems and Monetization</li>
+    </ul>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <p>Email: <a href="mailto:vijaydeshwaldev@gmail.com">vijaydeshwaldev@gmail.com</a></p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Vijay Deshwal. All rights reserved.</p>
+  </footer>
+
+  <!-- Modals for each game -->
+  <div id="game1" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('game1')">&times;</span>
+      <h3>Highway Traffic Racer</h3>
+      <iframe src="https://www.youtube.com/embed/your-video-id" frameborder="0" allowfullscreen></iframe>
+      <p>Endless car dodging game with speed increasing over time. Features smooth left-right button controls.</p>
+      <a href="#" target="_blank">Play on Google Play</a>
+    </div>
+  </div>
+  <div id="game2" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('game2')">&times;</span>
+      <h3>Fruit Merge</h3>
+      <iframe src="https://www.youtube.com/embed/your-video-id" frameborder="0" allowfullscreen></iframe>
+      <p>Combine fruits to evolve and reach the watermelon. Features physics-based mechanics and casual gameplay.</p>
+      <a href="#" target="_blank">Play on Google Play</a>
+    </div>
+  </div>
+
+  <script>
+    function openModal(id) {
+      document.getElementById(id).style.display = 'flex';
+    }
+    function closeModal(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+  </script>
+</body>
+</html>
